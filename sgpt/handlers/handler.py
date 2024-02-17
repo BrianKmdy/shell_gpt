@@ -21,6 +21,8 @@ class Handler:
 
         api_base_url = cfg.get("API_BASE_URL")
         self.base_url = None if api_base_url == "default" else api_base_url
+        api_version = cfg.get("API_VERSION")
+        self.api_version = None if api_version == "default" else api_version
         self.timeout = int(cfg.get("REQUEST_TIMEOUT"))
 
     @property
@@ -83,6 +85,7 @@ class Handler:
             stream=True,
             api_key=cfg.get("OPENAI_API_KEY"),
             base_url=self.base_url,
+            api_version=self.api_version,
             timeout=self.timeout,
         ):
             delta = chunk.choices[0].delta
